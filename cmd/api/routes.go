@@ -1,11 +1,17 @@
 package main
 
-import "net/http"
+import (
+	"net/http"
 
-func (app *application) routes() http.Handler {
-	mux := http.NewServeMux()
-	mux.HandleFunc("/v1/healthcheck", app.healthCheck)
-	mux.HandleFunc("/v1/movies/", app.movies)
+	"github.com/julienschmidt/httprouter"
+)
 
-	return mux
+func (app *application) routes() *httprouter.Router {
+	r := httprouter.New()
+
+	r.HandlerFunc(http.MethodGet, "/v1/healthcheck", app.healthCheck)
+	r.HandlerFunc(http.MethodPost, "/v1/movies", app.createMovie)
+	r.HandlerFunc(http.MethodGet, "/v1/movies/:id", app.showMovie)
+
+	return r
 }

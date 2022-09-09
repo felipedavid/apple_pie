@@ -11,10 +11,10 @@ func (app *application) healthCheck(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "version: %s\n", version)
 }
 
-func (app *application) movies(w http.ResponseWriter, r *http.Request) {
-	switch r.Method {
-	case http.MethodGet:
-	case http.MethodPost:
-	default:
-	}
+func (app *application) createMovie(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "create a new movie")
+}
+
+func (app *application) showMovie(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "showing a movie")
 }
